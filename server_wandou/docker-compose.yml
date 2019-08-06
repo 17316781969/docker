@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mongo_db:
+    container_name: 'mongo_db'
+    image: 'heawercher/mongo-enterprise:4.0'
+    ports:
+    - "27017:27017"
+    volumes:
+    - /root/docker/mongo/db:/data/db
+    - /root/docker/mongo/conf:/data/configdb
+
+  server_wandou:
+    container_name: 'server_wandou'
+    privileged: true
+    user: 'c'
+    image: 'local/server_wandou:0.0.1'
+    environment:
+    - VNC_SERVER_PASSWORD=123321
+    ports:
+    - "5910:5900"
+    - "5030:5030"
